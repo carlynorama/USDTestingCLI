@@ -1,6 +1,8 @@
 // swift-tools-version: 5.8
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
+
+
 import PackageDescription
 
 let package = Package(
@@ -12,12 +14,16 @@ let package = Package(
             targets: ["USDTestingCLI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.2")
+        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.2"),
+        .package(path: "../USDServiceProvider"),
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "USDTestingCLI",
-            dependencies: []),
+            dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "USDServiceProvider", package: "USDServiceProvider"),
+            ]),
         .testTarget(
             name: "USDTestingCLITests",
             dependencies: ["USDTestingCLI"]),
