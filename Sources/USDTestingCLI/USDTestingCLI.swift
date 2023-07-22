@@ -18,8 +18,8 @@ public struct USDTestingCLI:ParsableCommand {
     
     struct test:ParsableCommand {
         func run() throws {
+            print(USDServiceProvider().whatsInMyBin())
             print(USDServiceProvider().echo("can you hear me?"))
-            print(USDServiceProvider().whoAreTheUsers())
         }
     }
 }
