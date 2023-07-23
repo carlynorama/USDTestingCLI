@@ -25,16 +25,11 @@ public struct USDTestingCLI:ParsableCommand {
     
     struct makecrate:ParsableCommand {
         
-//        @Argument(help: "The phrase to repeat.")
-//        var phrase: String
-        
         @Argument(help: "The input file") var inputFile: String
         @Argument(help: "The output file") var outputFile: String?
         
         func run() throws {
             print("hello")
-//            let inputFile = "/Users/carlynorama/Developer/GitHub/USDTestingCLI/compress_me.usda"
-//            let outputFile = "/Users/carlynorama/Developer/GitHub/USDTestingCLI/compressed.usdc"
             USDServiceProvider().makeUSDC(inputFile: inputFile, outputFile: outputFile ?? "compressed.usdc")
         }
     }
@@ -42,3 +37,5 @@ public struct USDTestingCLI:ParsableCommand {
 
 ///Users/carlynorama/opd/USD_nopython_0722/bin
 
+//            let inputFile = "/Users/carlynorama/Developer/GitHub/USDTestingCLI/compress_me.usda"
+//            let outputFile = "/Users/carlynorama/Developer/GitHub/USDTestingCLI/compressed.usdc"
