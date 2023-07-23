@@ -2,6 +2,7 @@ import Foundation
 import ArgumentParser
 import USDServiceProvider
 
+let USDBuild = "/Users/carlynorama/opd/USD_nousdview_py3_10_0723/"
 
 @main
 public struct USDTestingCLI:ParsableCommand {
@@ -19,7 +20,7 @@ public struct USDTestingCLI:ParsableCommand {
     
     struct test:ParsableCommand {
         func run() throws {
-            print(USDServiceProvider().usdcatHelp())
+            print(USDServiceProvider(pathToUSDBuild:USDBuild).usdcatHelp())
         }
     }
     
@@ -29,8 +30,10 @@ public struct USDTestingCLI:ParsableCommand {
         @Argument(help: "The output file") var outputFile: String?
         
         func run() throws {
+            let usdSP = USDServiceProvider(pathToUSDBuild: USDBuild)
             print("hello")
-            USDServiceProvider().makeUSDC(inputFile: inputFile, outputFile: outputFile ?? "compressed.usdc")
+            usdSP.makeCrate(from: inputFile, outputFile: outputFile ?? "compressed_sunday.usdc")
+            usdSP.check(inputFile)
         }
     }
 }
