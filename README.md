@@ -1,3 +1,5 @@
 # USDTestingCLI
 
-A description of this package.
+A CLI to test the USDServiceProvider Library.
+
+https://github.com/carlynorama/USDServiceProvider
