@@ -14,9 +14,10 @@ public struct USDTestingCLI:ParsableCommand {
         version: "0.0.1",
         subcommands: [
             testusdcat.self,
-            checkncrate.self
+            checkncrate.self,
+            helloworld.self
         ],
-        defaultSubcommand: checkncrate.self)
+        defaultSubcommand: helloworld.self)
     
     public init() {}
     
@@ -36,17 +37,28 @@ public struct USDTestingCLI:ParsableCommand {
             //TODO: fragile. if cli sticks around, improve.
             let outputFilePath = outputFile ?? inputFile.replacingOccurrences(of: ".usda", with: ".usdc")
             
-            let usdSP = USDServiceProvider(pathToUSDBuild: USDBuild, pythonEnv: .pyenv("3.10p"))
+            let usdSP = USDServiceProvider(pathToUSDBuild: USDBuild, pythonEnv: pythonEnv)
             
             print("hello")
             
             let reuslt = usdSP.check(inputFile)
             print(reuslt)
             usdSP.makeCrate(from: inputFile, outputFile: outputFilePath)
-            
         }
     }
     
+    struct helloworld:ParsableCommand {
+        @Argument(help: "The output file") var outputFile: String?
+        
+        func run() throws {
+            
+            //TODO: also fragile. if cli sticks around, improve.
+            let outputFilePath = outputFile ?? "~/Documents/hello_world.usda"
+            
+            let usdSP = USDServiceProvider(pathToUSDBuild: USDBuild, pythonEnv: pythonEnv)
+            usdSP.saveHelloWorld(to: outputFilePath)
+        }
+    }
     
     
 }
