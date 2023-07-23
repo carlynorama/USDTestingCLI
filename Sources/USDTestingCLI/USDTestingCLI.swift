@@ -14,9 +14,9 @@ public struct USDTestingCLI:ParsableCommand {
         version: "0.0.1",
         subcommands: [
             testusdcat.self,
-            makecrate.self
+            checkncrate.self
         ],
-        defaultSubcommand: makecrate.self)
+        defaultSubcommand: checkncrate.self)
     
     public init() {}
     
@@ -26,7 +26,7 @@ public struct USDTestingCLI:ParsableCommand {
         }
     }
     
-    struct makecrate:ParsableCommand {
+    struct checkncrate:ParsableCommand {
         
         @Argument(help: "The input file") var inputFile: String
         @Argument(help: "The output file") var outputFile: String?
@@ -46,4 +46,7 @@ public struct USDTestingCLI:ParsableCommand {
             
         }
     }
+    
+    
+    
 }
