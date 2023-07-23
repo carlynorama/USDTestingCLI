@@ -37,10 +37,13 @@ public struct USDTestingCLI:ParsableCommand {
             let outputFilePath = outputFile ?? inputFile.replacingOccurrences(of: ".usda", with: ".usdc")
             
             let usdSP = USDServiceProvider(pathToUSDBuild: USDBuild, pythonEnv: .pyenv("3.10p"))
+            
             print("hello")
             
+            let reuslt = usdSP.check(inputFile)
+            print(reuslt)
             usdSP.makeCrate(from: inputFile, outputFile: outputFilePath)
-            usdSP.check(inputFile)
+            
         }
     }
 }
