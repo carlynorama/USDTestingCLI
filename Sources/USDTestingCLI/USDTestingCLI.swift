@@ -2,7 +2,9 @@ import Foundation
 import ArgumentParser
 import USDServiceProvider
 
+//MARK: --------------------- YOUR SETUP GOES HERE ------------------------
 let USDBuild = "/Users/carlynorama/opd/USD_nousdview_py3_10_0723/"
+let pythonEnv:USDServiceProvider.PythonEnvironment = .pyenv("3.10")
 
 @main
 public struct USDTestingCLI:ParsableCommand {
@@ -11,16 +13,16 @@ public struct USDTestingCLI:ParsableCommand {
         abstract: "A Swift command-line tool",
         version: "0.0.1",
         subcommands: [
-            test.self,
+            testusdcat.self,
             makecrate.self
         ],
         defaultSubcommand: makecrate.self)
     
     public init() {}
     
-    struct test:ParsableCommand {
+    struct testusdcat:ParsableCommand {
         func run() throws {
-            print(USDServiceProvider(pathToUSDBuild:USDBuild).usdcatHelp())
+            print(USDServiceProvider(pathToUSDBuild:USDBuild, pythonEnv: pythonEnv).usdcatHelp())
         }
     }
     
@@ -30,15 +32,15 @@ public struct USDTestingCLI:ParsableCommand {
         @Argument(help: "The output file") var outputFile: String?
         
         func run() throws {
-            let usdSP = USDServiceProvider(pathToUSDBuild: USDBuild)
+            
+            //TODO: fragile. if cli sticks around, improve.
+            let outputFilePath = outputFile ?? inputFile.replacingOccurrences(of: ".usda", with: ".usdc")
+            
+            let usdSP = USDServiceProvider(pathToUSDBuild: USDBuild, pythonEnv: .pyenv("3.10p"))
             print("hello")
-            usdSP.makeCrate(from: inputFile, outputFile: outputFile ?? "compressed_sunday.usdc")
+            
+            usdSP.makeCrate(from: inputFile, outputFile: outputFilePath)
             usdSP.check(inputFile)
         }
     }
 }
-
-///Users/carlynorama/opd/USD_nopython_0722/bin
-
-//            let inputFile = "/Users/carlynorama/Developer/GitHub/USDTestingCLI/compress_me.usda"
-//            let outputFile = "/Users/carlynorama/Developer/GitHub/USDTestingCLI/compressed.usdc"
