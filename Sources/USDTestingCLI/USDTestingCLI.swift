@@ -18,7 +18,7 @@ public struct USDTestingCLI:ParsableCommand {
             helloworld.self,
             teststring.self
         ],
-        defaultSubcommand: teststring.self)
+        defaultSubcommand: checkncrate.self)
     
     public init() {}
     
